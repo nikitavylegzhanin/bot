@@ -58,6 +58,10 @@ export const openPosition = async (
       account?.liquidPortfolio
     )
 
+    if (!orderQt) {
+      throw new Error('Not enough money to place an order')
+    }
+
     // открываем только при достаточном объеме
     if (orderQt < lastPriceVolume) return
 
@@ -165,6 +169,10 @@ export const averagingPosition = async (
       operation === 1 ? bot.kLong : bot.kShort,
       account?.liquidPortfolio
     )
+
+    if (!orderQt) {
+      throw new Error('Not enough money to place an order')
+    }
 
     // усредняем только при достаточном объеме
     if (orderQt < lastPriceVolume) return
